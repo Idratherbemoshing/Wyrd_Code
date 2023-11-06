@@ -1,51 +1,46 @@
 function Get-InstalledAppsFromRegistry {
-    $uninstallKeys = 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall',
-                     'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall'
+    $locations = 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall',
+    'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall'
 
-    $appList = @()
-    foreach ($key in $uninstallKeys) {
-        Get-ChildItem $key | ForEach-Object {
-            $appProperties = Get-ItemProperty $_.PsPath
-            if ($appProperties.DisplayName) {
-                $appList += $appProperties.DisplayName
+    $programs = @()
+
+    foreach ($place in $locations) {
+        Get-ChildItem $place | ForEach-Object {
+            $programDetails = Get-ItemProperty $_.PsPath
+            if ($programDetails.DisplayName) {
+                $programs += $programDetails.DisplayName
             }
         }
     }
-    return $appList | Sort-Object | Get-Unique
+
+    return $programs | Sort-Object | Get-Unique
 }
 
-function Select-AppsForUninstall {
-    param ([string[]]$appList)
+$allPrograms = Get-InstalledAppsFromRegistry
 
-    $index = 1
-    foreach ($app in $appList) {
-        Write-Host "$index. $app"
-        $index++
+$counter = 1
+$allPrograms | ForEach-Object {
+    Write-Host "$counter. $_"
+    $counter++
+}
+
+# Show a prompt asking which programs they want to uninstall.
+$programsToUninstall = Read-Host "Choose programs by number (e.g. 1,2,3). Separate multiple choices with commas"
+
+$chosenPrograms = $programsToUninstall -split ',' | ForEach-Object { $allPrograms[$_.Trim() - 1] }
+
+foreach ($program in $chosenPrograms) {
+    $howToUninstall = (Get-ItemProperty HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\* |
+        Where-Object { $_.DisplayName -eq $program }).UninstallString
+
+    if ($howToUninstall) {
+        Write-Host "Removing $program..."
+        Start-Process cmd.exe -ArgumentList "/c $howToUninstall /quiet" -Wait
+        Write-Host "$program has been removed."
     }
-
-    $selectedIndexes = Read-Host "Enter the numbers of the applications you want to uninstall (comma separated)"
-    return $selectedIndexes.Split(',').Trim() | ForEach-Object { $appList[[int]$_ - 1] }
-}
-
-# Main script
-$apps = Get-InstalledAppsFromRegistry
-$appsToUninstall = Select-AppsForUninstall -appList $apps
-
-Write-Host "You've chosen to uninstall the following applications:"
-$appsToUninstall | ForEach-Object { Write-Host $_ }
-$confirmation = Read-Host "Are you sure? (Y/N)"
-if ($confirmation -eq 'Y') {
-    foreach ($appName in $appsToUninstall) {
-        try {
-            $app = Get-WmiObject -Class Win32_Product | Where-Object { $_.Name -eq $appName }
-            if ($app) {
-                $app.Uninstall()
-                Write-Host "$appName uninstalled successfully." -ForegroundColor Green
-            } else {
-                Write-Host "Failed to uninstall $appName." -ForegroundColor Red
-            }
-        } catch {
-            Write-Host "Error uninstalling $appName. $_" -ForegroundColor Red
-        }
+    else {
+        Write-Host "Sorry, I couldn't figure out how to remove $program. Skipping it..."
     }
 }
+
+Write-Host "All done!"
