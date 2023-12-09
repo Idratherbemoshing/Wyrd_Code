@@ -1,0 +1,22 @@
+import requests
+import re
+
+# URL of the product page
+url = 'https://www.pccasegear.com/products/61114/amd-ryzen-9-7950x3d-processor'
+
+# Fetch the webpage content
+response = requests.get(url)
+webpage_content = response.text
+
+# Regular expression pattern to find the product details in JavaScript
+pattern = r"var product = {.*?price : '(\d+\.\d+)'"
+
+# Search for the pattern
+match = re.search(pattern, webpage_content, re.DOTALL)
+
+if match:
+    # Extract the price
+    price = match.group(1)
+    print(f"Price of the product: ${price}")
+else:
+    print("Price information not found.")

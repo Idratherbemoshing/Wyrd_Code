@@ -1,0 +1,18 @@
+# WORKING ON THIS
+
+#####################################################
+
+services:
+  openvpn-client:
+    image: ghcr.io/wfg/openvpn-client
+    container_name: openvpn-client
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun
+    environment:
+      - VPN_USERNAME=9qgjWtpMJpffEjWf
+      - VPN_PASSWORD=DnKTRrRcXUdQwGisuEBP37FnUNb0keAo      
+    volumes:
+      - /srv/dev-disk-by-uuid-73dc2c92-3a9f-4f48-a24b-389340b2bd97/config/opnvpn/:/data/vpn
+    restart: unless-stopped
