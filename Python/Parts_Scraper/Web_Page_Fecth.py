@@ -1,3 +1,5 @@
+# Playing around with WebScraping without api's
+#
 import requests
 
 # URL of the product page

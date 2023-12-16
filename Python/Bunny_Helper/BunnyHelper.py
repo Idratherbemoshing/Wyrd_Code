@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # Author: Wyrd
-# Title: BashBunny Script Helper
+# Title: BashBunny Helper
 # Description: This script modifies the DELAY command in Bash Bunny scripts within a specified directory and its subdirectories.
 # It supports both 'QUACK DELAY' and 'Q DELAY' syntax.
 # The script also provides functionality to create backups before modification and to restore the original files from these backups.

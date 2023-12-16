@@ -5,10 +5,10 @@ from bs4 import BeautifulSoup
 def fetch_price(url):
     # Sending a quest to the distant lands (website)
     response = requests.get(url)
-    # Parsing the ancient scrolls (HTML content)
+    # Parsing the HTML content
     soup = BeautifulSoup(response.text, 'html.parser')
 
-    # Finding the hidden treasure (the price element)
+    # Finding the price element
     # Note: You need to replace 'price_element' with the actual element identifier
     price = soup.find('span', {'id': 'price_element'}).text
 
@@ -17,7 +17,7 @@ def fetch_price(url):
 # URL of the PC part - replace with the actual product page
 product_url = 'http://something.com/pc-part'
 
-# Using the power of Python to fetch the current price
+# fetch the current price
 current_price = fetch_price(product_url)
 print(f"The current price of the chosen PC part is: {current_price}")
 

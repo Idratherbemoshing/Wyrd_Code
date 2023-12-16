@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # Author: Wyrd
-# Title: Ducky Script Helper
+# Title: Ducky Helper
 # 
 # Description: This script modifies the DELAY command in Ducky scripts within a specified directory and its subdirectories.
 # It also provides functionality to create backups before modification and to restore the original files from these backups.
