@@ -1,9 +1,7 @@
 # BunnyHelper & DuckyHelper Scripts
 
-`(\(\     _
-( -.-)  (v)
-o_(")(")<(__)
-``Wyrd.`
+![BashBunny - Hak5](https://shop.hak5.org/cdn/shop/articles/bash_bunny-credentials_093ed837-e318-4996-87c3-d511868e2ea7_600x.png?v=1651273634)
+
 ## Overview
 
 `BunnyHelper` and `DuckyHelper` are Python utilities designed to assist in the modification of Bash Bunny and Ducky scripts respectively. 
