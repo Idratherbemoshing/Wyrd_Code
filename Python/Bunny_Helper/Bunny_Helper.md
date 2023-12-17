@@ -19,8 +19,6 @@ BunnyHelper is a Python utility designed to aid in the modification of Bash Bunn
 
 1. **Basic Command:**
     
-    bashCopy code
-    
     `python3 BunnyHelper.py [options]`
     
 2. **Options:**
