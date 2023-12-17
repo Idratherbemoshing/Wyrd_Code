@@ -17,7 +17,7 @@ While both scripts share a similar core function - modifying the `DELAY` command
 
 ## Future Developments for BunnyHelper
 
-- **Bluetooth Fencing:** Leveraging Bash Bunny's capabilities to enable conditional script execution based on Bluetooth device proximity.
+- **GeoFencing:** Leveraging Bash Bunny's capabilities to enable conditional script execution based on Bluetooth device proximity.
 - **Enhanced Device Interaction:** Utilizing Bash Bunny's advanced features for more complex script modifications and interactions.
 
 ## Requirements
