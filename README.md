@@ -6,13 +6,16 @@ o_(")(")<(__)
 ``Wyrd.`
 ## Overview
 
-`BunnyHelper` and `DuckyHelper` are Python utilities designed to assist in the modification of Bash Bunny and Ducky scripts respectively. While both scripts share a similar core function - modifying the `DELAY` command in scripts - they cater to different devices with unique feature sets. `BunnyHelper` is tailored for BashBunny scripts, which can potentially leverage advanced features like Geofencing, while `DuckyHelper` is focused on just Ducky scripts.
+`BunnyHelper` and `DuckyHelper` are Python utilities designed to assist in the modification of Bash Bunny and Ducky scripts respectively. 
+While both scripts share a similar core function - modifying the `DELAY` command in scripts - they cater to different devices with unique feature sets.
+`BunnyHelper` is tailored for BashBunny scripts, which can potentially leverage advanced features like Geofencing, while `DuckyHelper` is focused on just Ducky scripts.
 
 ## Features
 
 - **Modify DELAY Command:** Both scripts automatically adjust the `DELAY` command in scripts within a specified directory and its subdirectories.
 - **Backup and Restore:** They create backups before any modifications and allow restoration to original scripts.
-- **Device-Specific Adaptations:** While `DuckyHelper` is straightforward for Ducky script modifications, `BunnyHelper` is designed with the potential to integrate advanced Bash Bunny features.
+- **Device-Specific Adaptations:** While `DuckyHelper` is straightforward for Ducky script modifications,
+  `BunnyHelper` is designed with the potential to integrate advanced Bash Bunny features.
 
 ## Future Developments for BunnyHelper
 
@@ -28,13 +31,11 @@ o_(")(")<(__)
 
 ### BunnyHelper
 
-bashCopy code
 
 `python3 BunnyHelper.py [options]`
 
 ### DuckyHelper
 
-bashCopy code
 
 `python3 DuckyHelper.py [options]`
 
